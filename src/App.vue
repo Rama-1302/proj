@@ -140,6 +140,13 @@
 <br>
 <h2> From NewCom component </h2>
 <new-com id=" id class " movie="Enthiran"  :budget="200" :Status="true" > </new-com>
+
+<hr>
+<h1>Provide and inject</h1>
+<h2>App component displaying user name: {{componentName}}</h2>
+<component-c/>
+
+
    </div>   
 </template>
 
@@ -147,11 +154,12 @@
 //import HelloWorld from './components/HelloWorld.vue'
 import RamaPrabha from './components/RamaPrabha.vue'
 import NewCom from './components/NewCom.vue'
+import componentC from './components/componentC.vue'
 export default {
   name: 'App',
   components:{
              // eslint-disable-next-line vue/no-unused-components
-             RamaPrabha,NewCom
+             RamaPrabha,NewCom,componentC,
   },
   data(){   return{ 
  course1:" web development",
@@ -223,7 +231,8 @@ export default {
       age:"age",
     
      }, 
-     moviearr:[ " No way home"," far from home"]
+     moviearr:[ " No way home"," far from home"],
+     componentName:"RamaprabhaR"
      }
    
      },
@@ -301,6 +310,11 @@ immediate:true,
    }
    
    
+    },
+
+    provide (){
+      return{ username:this.componentName }
+     
     }
   };
 
