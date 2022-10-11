@@ -151,6 +151,56 @@
 <button @click=" showPopup=true"> Open pop-up</button>
 <pop-up v-show="showPopup" @close=" closePopup " />
 
+<hr>
+<h1> cards</h1>
+<card-comp/>
+<br>
+<card-comp> <h1> card rendered by heading </h1></card-comp>
+<br>
+<card-comp ><h6> hello</h6></card-comp>
+
+
+<card-comp>
+  <template v-slot:heading > 
+    <h3 > this is heading </h3>
+  </template>
+
+  <template v-slot:foot>
+    <h6> Footer line</h6>
+  </template>
+</card-comp>
+
+<hr>
+<list-names>
+  <template v-slot:default="slotProps">
+    {{slotProps.first}} {{slotProps.last}}
+  </template>
+</list-names>
+
+<list-names>
+  <template v-slot:default="slotProps">
+    {{slotProps.last}}   {{slotProps.first}}
+  </template>
+</list-names>
+
+<list-names>
+  <template v-slot:default="slotProps">
+    {{slotProps.first}} 
+  </template>
+</list-names>
+
+<hr>
+<h2 class="style" > App component</h2>
+<styles-comp></styles-comp>
+
+<styles-comp><h2 class="style"> styles slot</h2> </styles-comp>
+
+<hr> 
+<h1>Dynamic Components</h1>
+<button @click="activateTab ='TabA'"> Tab A</button>
+<button @click="activateTab ='TabB'"> Tab B </button>
+
+<component :is="activateTab" />
 
    </div>   
 </template>
@@ -161,11 +211,17 @@ import RamaPrabha from './components/RamaPrabha.vue'
 import NewCom from './components/NewCom.vue'
 import componentC from './components/componentC.vue'
 import PopUp from './components/PopUp.vue'
+import CardComp from './components/CardComp.vue'
+import ListNames from './components/ListNames.vue'
+import StylesComp from './components/StylesComp.vue'
+import TabA from './components/TabA.vue'
+import TabB from './components/TabB.vue'
 export default {
   name: 'App',
   components:{
              // eslint-disable-next-line vue/no-unused-components
-             RamaPrabha,NewCom,componentC,PopUp,
+             RamaPrabha,NewCom,componentC,
+             PopUp,CardComp,ListNames,StylesComp,TabA,TabB,
   },
   data(){   return{ 
  course1:" web development",
@@ -240,6 +296,7 @@ export default {
      moviearr:[ " No way home"," far from home"],
      componentName:"RamaprabhaR",
      showPopup:false,
+     activateTab:'TabA',
      }
    
      },
@@ -266,9 +323,9 @@ submitfn(Event){
 newEntry(){
     this.full="R "
 },
-closePopup(namefromevent){
+closePopup(name1){
 this.showPopup=false;
-console.log("Name passed :", namefromevent)
+console.log("Name passed :", name1)
 }
   
   
@@ -334,7 +391,7 @@ immediate:true,
 
 </script>
 
-<style>
+<style scoped  >
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -356,4 +413,11 @@ color:red;
 .falseClass2{
   font-style: italic;
 }
-</style>
+
+.style{
+
+    color:orangered
+
+}
+
+</styles-comp>
