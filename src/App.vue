@@ -119,7 +119,7 @@
 <h3> volume tracker </h3>
 <h3> volume {{volume}} </h3>
 <button @click=" volume = volume+2"> increase volume </button> 
-<button @click=" volume -=1"> decrease volume </button>
+<button @click=" volume -=2"> decrease volume </button>
 
 <br> <br><input type="text" v-model="movie"> 
 
@@ -133,7 +133,7 @@
 <hr>
 <br><h1> Components</h1>
 <RamaPrabha name =" Rama " place =" karur"/>
-<RamaPrabha name = "vaish" place="somewhere in KA "/>
+<RamaPrabha name = "vaish" place=" KA "/>
 <RamaPrabha :name = " course1" :place="course2 "/>
 <br>
 
@@ -146,6 +146,11 @@
 <h2>App component displaying user name: {{componentName}}</h2>
 <component-c/>
 
+<hr>
+<h1> Pop-up</h1>
+<button @click=" showPopup=true"> Open pop-up</button>
+<pop-up v-show="showPopup" @close=" closePopup " />
+
 
    </div>   
 </template>
@@ -155,11 +160,12 @@
 import RamaPrabha from './components/RamaPrabha.vue'
 import NewCom from './components/NewCom.vue'
 import componentC from './components/componentC.vue'
+import PopUp from './components/PopUp.vue'
 export default {
   name: 'App',
   components:{
              // eslint-disable-next-line vue/no-unused-components
-             RamaPrabha,NewCom,componentC,
+             RamaPrabha,NewCom,componentC,PopUp,
   },
   data(){   return{ 
  course1:" web development",
@@ -232,7 +238,8 @@ export default {
     
      }, 
      moviearr:[ " No way home"," far from home"],
-     componentName:"RamaprabhaR"
+     componentName:"RamaprabhaR",
+     showPopup:false,
      }
    
      },
@@ -254,10 +261,17 @@ change(){
 },
 submitfn(Event){
   Event.preventDefault();
-  console.log( " form submitted " + this.formvalues)},
-  newEntry(){
+  console.log( " form submitted " + this.formvalues)
+},
+newEntry(){
     this.full="R "
-  }  
+},
+closePopup(namefromevent){
+this.showPopup=false;
+console.log("Name passed :", namefromevent)
+}
+  
+  
   },
   
    
